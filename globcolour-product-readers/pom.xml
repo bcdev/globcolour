@@ -14,7 +14,7 @@
     <groupId>org.esa.beam.globcolour</groupId>
     <artifactId>globcolour-product-readers</artifactId>
     <name>GlobColour Product Readers</name>
-    <version>1.5</version>
+    <version>1.5-SNAPSHOT</version>
     <description>GlobColour Binned and Mapped Product Readers</description>
 
     <dependencies>
