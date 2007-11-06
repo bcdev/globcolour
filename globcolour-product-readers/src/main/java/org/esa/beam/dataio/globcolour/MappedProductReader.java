@@ -1,5 +1,5 @@
 /*
-    $Id: MappedProductReader.java,v 1.4 2007-07-16 07:21:55 ralf Exp $
+    $Id$
 
     Copyright (c) 2006 Brockmann Consult. All rights reserved. Use is
     subject to license terms.
@@ -42,7 +42,7 @@ import java.io.IOException;
  * methods of the {@link AbstractProductReader}.
  *
  * @author Ralf Quast
- * @version $Revision: 1.4 $ $Date: 2007-07-16 07:21:55 $
+ * @version $Revision$ $Date$
  */
 public class MappedProductReader extends AbstractProductReader {
 

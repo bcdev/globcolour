@@ -1,5 +1,5 @@
 /*
-    $Id: BinnedProductReaderPlugIn.java,v 1.2 2007-06-14 17:30:53 ralf Exp $
+    $Id$
 
     Copyright (c) 2006 Brockmann Consult. All rights reserved. Use is
     subject to license terms.
@@ -39,7 +39,7 @@ import java.util.Locale;
  * {@link ProductReaderPlugIn}.
  *
  * @author Ralf Quast
- * @version $Revision: 1.2 $ $Date: 2007-06-14 17:30:53 $
+ * @version $Revision$ $Date$
  * @see org.esa.beam.framework.dataio.ProductReaderPlugIn
  */
 public class BinnedProductReaderPlugIn implements ProductReaderPlugIn {

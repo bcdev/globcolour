@@ -1,5 +1,5 @@
 /*
-    $Id: ProductUtilities.java,v 1.2 2007-06-14 17:53:09 ralf Exp $
+    $Id$
 
     Copyright (c) 2006 Brockmann Consult. All rights reserved. Use is
     subject to license terms.
@@ -29,7 +29,7 @@ import java.text.ParseException;
  * methods specific for GlobColour products only.
  *
  * @author Ralf Quast
- * @version $Revision: 1.2 $ $Date: 2007-06-14 17:53:09 $
+ * @version $Revision$ $Date$
  */
 public class ProductUtilities {
 

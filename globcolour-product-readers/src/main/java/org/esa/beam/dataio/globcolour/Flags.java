@@ -7,7 +7,7 @@ import java.awt.*;
  * flags set by the GlobColour processor.
  *
  * @author Ralf Quast
- * @version $Revision: 1.2 $ $Date: 2007-06-14 17:55:18 $
+ * @version $Revision$ $Date$
  */
 enum Flags {
 

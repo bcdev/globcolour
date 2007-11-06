@@ -1,5 +1,5 @@
 /*
-    $Id: BinnedProductReader.java,v 1.5 2007-07-17 17:52:04 ralf Exp $
+    $Id$
 
     Copyright (c) 2006 Brockmann Consult. All rights reserved. Use is
     subject to license terms.
@@ -52,7 +52,7 @@ import java.util.List;
  * methods of the {@link AbstractProductReader}.
  *
  * @author Ralf Quast
- * @version $Revision: 1.5 $ $Date: 2007-07-17 17:52:04 $
+ * @version $Revision$ $Date$
  * @see IsinGrid
  * @see BinnedProductReaderPlugIn
  */

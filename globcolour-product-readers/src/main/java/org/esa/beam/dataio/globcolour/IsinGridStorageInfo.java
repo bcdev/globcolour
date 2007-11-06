@@ -1,5 +1,5 @@
 /*
-    $Id: IsinGridStorageInfo.java,v 1.1 2007-06-14 17:42:31 ralf Exp $
+    $Id$
 
     Copyright (c) 2006 Brockmann Consult. All rights reserved. Use is
     subject to license terms.
@@ -28,7 +28,7 @@ import java.text.MessageFormat;
  * storage information for any continuous sequence of {@link IsinGrid} rows.
  *
  * @author Ralf Quast
- * @version $Revision: 1.1 $ $Date: 2007-06-14 17:42:31 $
+ * @version $Revision$ $Date$
  * @see IsinGrid
  */
 class IsinGridStorageInfo {

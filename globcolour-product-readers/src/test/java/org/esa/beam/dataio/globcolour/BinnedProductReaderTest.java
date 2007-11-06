@@ -1,5 +1,5 @@
 /*
-    $Id: BinnedProductReaderTest.java,v 1.2 2007-06-14 17:42:32 ralf Exp $
+    $Id$
 
     Copyright (c) 2006 Brockmann Consult. All rights reserved. Use is
     subject to license terms.
@@ -27,7 +27,7 @@ import junit.framework.TestCase;
  *
  * @author Norman Fomferra
  * @author Ralf Quast
- * @version $Revision: 1.2 $ $Date: 2007-06-14 17:42:32 $
+ * @version $Revision$ $Date$
  */
 public class BinnedProductReaderTest extends TestCase {
 

@@ -1,5 +1,5 @@
 /*
-    $Id: MappedProductReaderPlugInTest.java,v 1.1 2007-06-14 17:19:34 ralf Exp $
+    $Id$
 
     Copyright (c) 2006 Brockmann Consult. All rights reserved. Use is
     subject to license terms.
@@ -33,7 +33,7 @@ import java.net.URLDecoder;
  *
  * @author Norman Fomferra
  * @author Ralf Quast
- * @version $Revision: 1.1 $ $Date: 2007-06-14 17:19:34 $
+ * @version $Revision$ $Date$
  */
 public class MappedProductReaderPlugInTest extends TestCase {
 

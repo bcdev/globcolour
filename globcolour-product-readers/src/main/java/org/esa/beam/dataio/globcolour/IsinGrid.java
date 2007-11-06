@@ -1,5 +1,5 @@
 /*
-    $Id: IsinGrid.java,v 1.1 2007-06-14 17:42:31 ralf Exp $
+    $Id$
 
     Copyright (c) 2006 Brockmann Consult. All rights reserved. Use is
     subject to license terms.
@@ -25,7 +25,7 @@ package org.esa.beam.dataio.globcolour;
  * grid which is used by Binned GlobColour products.
  *
  * @author Ralf Quast
- * @version $Revision: 1.1 $ $Date: 2007-06-14 17:42:31 $
+ * @version $Revision$ $Date$
  */
 class IsinGrid {
 

@@ -1,5 +1,5 @@
 /*
-    $Id: FlagsTest.java,v 1.1 2007-06-14 17:53:10 ralf Exp $
+    $Id$
 
     Copyright (c) 2006 Brockmann Consult. All rights reserved. Use is
     subject to license terms.
@@ -26,7 +26,7 @@ import junit.framework.TestCase;
  * Test methods for class {@link Flags}.
  *
  * @author Ralf Quast
- * @version $Revision: 1.1 $ $Date: 2007-06-14 17:53:10 $
+ * @version $Revision$ $Date$
  */
 public class FlagsTest extends TestCase {
 

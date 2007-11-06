@@ -1,5 +1,5 @@
 /*
-    $Id: MappedProductReaderTest.java,v 1.5 2007-06-15 16:49:51 ralf Exp $
+    $Id$
 
     Copyright (c) 2006 Brockmann Consult. All rights reserved. Use is
     subject to license terms.
@@ -36,7 +36,7 @@ import java.util.Calendar;
  *
  * @author Norman Fomferra
  * @author Ralf Quast
- * @version $Revision: 1.5 $ $Date: 2007-06-15 16:49:51 $
+ * @version $Revision$ $Date$
  */
 public final class MappedProductReaderTest extends TestCase {
 
