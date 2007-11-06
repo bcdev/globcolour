@@ -1,0 +1,164 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <name>GlobColour DDS Tools</name>
+    <groupId>org.esa.beam.globcolour</groupId>
+    <artifactId>globcolour-dds-tools</artifactId>
+    <version>1.5-SNAPSHOT</version>
+
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>globcolour-product-readers</module>
+        <!--
+                <module>globcolour-matchup-tool</module>
+        -->
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- Ceres System Level Module ############################################# -->
+
+            <dependency>
+                <groupId>com.bc.ceres</groupId>
+                <artifactId>ceres-launcher</artifactId>
+                <version>0.6</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.bc.ceres</groupId>
+                <artifactId>ceres-core</artifactId>
+                <version>0.6</version>
+            </dependency>
+
+            <!-- BEAM System Level Modules ############################################# -->
+
+            <dependency>
+                <groupId>org.esa.beam</groupId>
+                <artifactId>beam-core</artifactId>
+                <version>4.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.esa.beam</groupId>
+                <artifactId>beam-bootstrap</artifactId>
+                <version>4.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.esa.beam</groupId>
+                <artifactId>beam-netcdf-reader</artifactId>
+                <version>1.0</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>ucar.netcdf</groupId>
+                <artifactId>lib-netcdf</artifactId>
+                <version>2.2.16</version>
+            </dependency>
+
+            <!-- Java Help Library ############################################# -->
+
+            <dependency>
+                <groupId>javax.help</groupId>
+                <artifactId>jhall</artifactId>
+                <version>2.0-02</version>
+            </dependency>
+
+            <!-- JDOM Library ############################################# -->
+
+            <dependency>
+                <groupId>jdom</groupId>
+                <artifactId>jdom</artifactId>
+                <version>1.0</version>
+            </dependency>
+
+            <!-- JUnit Libraries ############################################# -->
+
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>3.8.1</version>
+                <scope>test</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.esa.beam</groupId>
+            <artifactId>beam-bootstrap</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                    <debug>true</debug>
+                    <fork>false</fork>
+                    <encoding>ISO-8859-1</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-idea-plugin</artifactId>
+                <configuration>
+                    <downloadSources>true</downloadSources>
+                    <downloadJavadocs>true</downloadJavadocs>
+                    <jdkName>1.6</jdkName>
+                    <jdkLevel>1.6</jdkLevel>
+                    <exclude>target</exclude>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <excludePackageNames>*.internal;</excludePackageNames>
+                    <quiet>true</quiet>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
+
+    <developers>
+        <developer>
+            <id>norman</id>
+            <name>Norman Fomferra</name>
+            <email>norman.fomferra@brockmann-consult.de</email>
+            <organization>Brockmann Consult</organization>
+            <roles>
+                <role>Project Manager</role>
+                <role>Java Developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>ralf</id>
+            <name>Ralf Quast</name>
+            <email>ralf.quast@brockmann-consult.de</email>
+            <organization>Brockmann Consult</organization>
+            <roles>
+                <role>Java Developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+</project>
