@@ -21,14 +21,29 @@
 package org.esa.beam.dataio.globcolour;
 
 /**
- * The class <code>ProductTypes</code> specifies the identifiers of the
- * different GlobColour product types.
+ * Various constants used by the GlobColour product readers.
  *
  * @author Ralf Quast
  * @version $Revision$ $Date$
  */
-public class ProductTypes {
+public class ReaderConstants {
 
+    /**
+     * The name of the Bin dimension.
+     */
+    static final String BIN = "bin";
+    /**
+     * The name of the Row variable.
+     */
+    static final String ROW = "row";
+    /**
+     * The name of the Column variable.
+     */
+    static final String COL = "col";
+    /**
+     * The ISIN grid underlying the GlobColour Binned products.
+     */
+    static final IsinGrid IG = new IsinGrid(4320);
     /**
      * The type identifier for Binned global products.
      */

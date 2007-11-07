@@ -92,15 +92,15 @@ public class BinnedProductReaderPlugIn implements ProductReaderPlugIn {
             }
 
             final Group ncroot = ncfile.getRootGroup();
-            if (ncroot.findDimension(BinnedProductReader.BIN) == null) {
+            if (ncroot.findDimension(ReaderConstants.BIN) == null) {
                 return DecodeQualification.UNABLE;
             }
 
-            final Variable row = ncroot.findVariable(BinnedProductReader.ROW);
+            final Variable row = ncroot.findVariable(ReaderConstants.ROW);
             if (row == null || row.getRank() != 1 || !DataType.SHORT.equals(row.getDataType())) {
                 return DecodeQualification.UNABLE;
             }
-            final Variable col = ncroot.findVariable(BinnedProductReader.COL);
+            final Variable col = ncroot.findVariable(ReaderConstants.COL);
             if (col == null || col.getRank() != 1 || !DataType.SHORT.equals(col.getDataType())) {
                 return DecodeQualification.UNABLE;
             }

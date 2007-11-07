@@ -58,23 +58,6 @@ import java.util.List;
  */
 public class BinnedProductReader extends AbstractProductReader {
 
-    /**
-     * The name of the Bin dimension.
-     */
-    static final String BIN = "bin";
-    /**
-     * The name of the Row variable.
-     */
-    static final String ROW = "row";
-    /**
-     * The name of the Column variable.
-     */
-    static final String COL = "col";
-    /**
-     * The ISIN grid underlying the GlobColour Binned products.
-     */
-    static final IsinGrid IG = new IsinGrid(4320);
-
     private IsinGridStorageInfo storageInfo;
     private EquirectGrid equirectGrid;
     private NetcdfFile ncfile;
@@ -114,7 +97,7 @@ public class BinnedProductReader extends AbstractProductReader {
         equirectGrid = createEquirectGrid(minLat, maxLat, minLon, maxLon, latitudeOfTrueScale);
 
         final Product product = new Product(file.getName(),
-                                            ProductTypes.BINNED_GLOBAL,
+                                            ReaderConstants.BINNED_GLOBAL,
                                             equirectGrid.getColCount(),
                                             equirectGrid.getRowCount(),
                                             this);
@@ -127,7 +110,7 @@ public class BinnedProductReader extends AbstractProductReader {
         product.setFileLocation(file);
         NetcdfReaderUtils.transferMetadata(ncfile, product.getMetadataRoot());
 
-        final Dimension bin = ncroot.findDimension(BIN);
+        final Dimension bin = ncroot.findDimension(ReaderConstants.BIN);
         final List<Variable> variableList = findVariables(ncroot, bin);
         addBands(product, variableList);
 
@@ -135,7 +118,7 @@ public class BinnedProductReader extends AbstractProductReader {
         ProductUtilities.extend(product);
 
         if (ProductUtilities.isDiagnosticDataSet(product)) {
-            product.setProductType(ProductTypes.BINNED_DDS);
+            product.setProductType(ReaderConstants.BINNED_DDS);
         }
 
         product.setModified(false);
@@ -189,13 +172,14 @@ public class BinnedProductReader extends AbstractProductReader {
         Guardian.assertTrue("sourceWidth != targetWidth", sourceWidth == targetWidth);
         Guardian.assertTrue("sourceHeight != targetHeight", sourceHeight == targetHeight);
 
-        final Variable col = ncfile.findVariable(COL);
+        final Variable col = ncfile.findVariable(ReaderConstants.COL);
         final Variable var = ncfile.findVariable(targetBand.getName());
 
         pm.beginTask(MessageFormat.format("Resampling data from band ''{0}''", targetBand.getName()), targetHeight);
         try {
             if (storageInfo == null) {
-                storageInfo = createStorageInfo(IG.getRow(equirectGrid.getMinLat()), equirectGrid.getRowCount());
+                storageInfo = createStorageInfo(ReaderConstants.IG.getRow(equirectGrid.getMinLat()),
+                                                equirectGrid.getRowCount());
             }
 
             final int[] start = new int[1];
@@ -221,7 +205,7 @@ public class BinnedProductReader extends AbstractProductReader {
                 for (int j = 0, k = 0; j < targetWidth; ++j) {
                     final int x = sourceOffsetX + j;
                     // calculate the ISIN grid column corresponding to (x, y)
-                    final int z = IG.getCol(storageInfo.getRow(y), equirectGrid.getLon(x));
+                    final int z = ReaderConstants.IG.getCol(storageInfo.getRow(y), equirectGrid.getLon(x));
 
                     for (; k < shape[0]; ++k) {
                         index.set(k);
@@ -275,7 +259,7 @@ public class BinnedProductReader extends AbstractProductReader {
 
     private IsinGridStorageInfo createStorageInfo(final int minRow, int rowCount)
             throws IOException, InvalidRangeException {
-        final Variable row = ncfile.findVariable(ROW);
+        final Variable row = ncfile.findVariable(ReaderConstants.ROW);
 
         final int[] offsets = new int[rowCount];
         int binCount = 0;
@@ -323,22 +307,25 @@ public class BinnedProductReader extends AbstractProductReader {
                                                    final double minLon,
                                                    final double maxLon,
                                                    final double latitudeOfTrueScale) {
-        final int maxRowCount = IG.getRowCount() - 1;
+        final int maxRowCount = ReaderConstants.IG.getRowCount() - 1;
 
-        final int minRow = Math.min(IG.getRow(minLat), maxRowCount);
-        final int maxRow = Math.min(IG.getRow(maxLat), maxRowCount);
-        final int rowOfTrueScale = Math.min(IG.getRow(latitudeOfTrueScale), maxRowCount);
+        final int minRow = Math.min(ReaderConstants.IG.getRow(minLat), maxRowCount);
+        final int maxRow = Math.min(ReaderConstants.IG.getRow(maxLat), maxRowCount);
+        final int rowOfTrueScale = Math.min(ReaderConstants.IG.getRow(latitudeOfTrueScale), maxRowCount);
 
-        final int maxColCount = IG.getColCount(rowOfTrueScale) - 1;
+        final int maxColCount = ReaderConstants.IG.getColCount(rowOfTrueScale) - 1;
 
-        final int minCol = Math.max(0, Math.min(IG.getCol(rowOfTrueScale, minLon), maxColCount));
-        final int maxCol = Math.max(0, Math.min(IG.getCol(rowOfTrueScale, maxLon), maxColCount));
+        final int minCol = Math.max(0, Math.min(ReaderConstants.IG.getCol(rowOfTrueScale, minLon), maxColCount));
+        final int maxCol = Math.max(0, Math.min(ReaderConstants.IG.getCol(rowOfTrueScale, maxLon), maxColCount));
 
         final int rowCount = maxRow - minRow + 1;
         final int colCount = maxCol - minCol + 1;
 
-        return new EquirectGrid(rowCount, colCount, IG.getLatSouth(minRow), IG.getLonWest(rowOfTrueScale, minCol),
-                                IG.getLatStep(), IG.getLonStep(rowOfTrueScale));
+        return new EquirectGrid(rowCount, colCount,
+                                ReaderConstants.IG.getLatSouth(minRow),
+                                ReaderConstants.IG.getLonWest(rowOfTrueScale, minCol),
+                                ReaderConstants.IG.getLatStep(),
+                                ReaderConstants.IG.getLonStep(rowOfTrueScale));
     }
 
     @SuppressWarnings("unchecked")
@@ -367,7 +354,7 @@ public class BinnedProductReader extends AbstractProductReader {
             final Band band = new Band(variableName, rasterDataType, rasterWidth, rasterHeight);
 
             double fillValue;
-            if (ROW.equals(variableName) || COL.equals(variableName)) {
+            if (ReaderConstants.ROW.equals(variableName) || ReaderConstants.COL.equals(variableName)) {
                 fillValue = -1.0;
             } else {
                 fillValue = getDoubleValue(variable.findAttribute(ProductAttributes.FILL_VALUE), 0.0);

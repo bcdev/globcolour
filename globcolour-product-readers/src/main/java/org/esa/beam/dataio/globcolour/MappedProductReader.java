@@ -74,9 +74,9 @@ public class MappedProductReader extends AbstractProductReader {
         final Product product = productReader.readProductNodes(getInput(), getSubsetDef());
 
         if (ProductUtilities.isDiagnosticDataSet(product)) {
-            product.setProductType(ProductTypes.MAPPED_DDS);
+            product.setProductType(ReaderConstants.MAPPED_DDS);
         } else {
-            product.setProductType(ProductTypes.MAPPED_GLOBAL);
+            product.setProductType(ReaderConstants.MAPPED_GLOBAL);
         }
 
         product.setProductReader(this);

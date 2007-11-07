@@ -31,32 +31,6 @@ import junit.framework.TestCase;
  */
 public class BinnedProductReaderTest extends TestCase {
 
-    // GlobColour Technical Specification
-    private static final int ROW_COUNT_SPEC = 4320;
-    private static final int TOTAL_BIN_COUNT_SPEC = 23761676;
-    private static final int POLE_BIN_COUNT_SPEC = 3;
-    private static final int EQUATOR_BIN_COUNT_SPEC = 8640;
-
-    public void testIsinGrid() {
-        final IsinGrid ig = BinnedProductReader.IG;
-
-        assertEquals(ROW_COUNT_SPEC, ig.getRowCount());
-        assertEquals(TOTAL_BIN_COUNT_SPEC, ig.getBinCount());
-
-        final int southPoleRow = 0;
-        final int northPoleRow = ROW_COUNT_SPEC - 1;
-
-        assertEquals(POLE_BIN_COUNT_SPEC, ig.getColCount(southPoleRow));
-        assertEquals(POLE_BIN_COUNT_SPEC, ig.getColCount(northPoleRow));
-
-        final int southernEquatorRow = ROW_COUNT_SPEC / 2 - 1;
-        final int northernEquatorRow = ROW_COUNT_SPEC / 2;
-
-        assertEquals(EQUATOR_BIN_COUNT_SPEC, ig.getColCount(southernEquatorRow));
-        assertEquals(EQUATOR_BIN_COUNT_SPEC, ig.getColCount(northernEquatorRow));
-    }
-
-
     public void testReadProductNodes() {
         // todo - provide a test case with some netcdf file variants here
     }
