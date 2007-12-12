@@ -40,13 +40,13 @@
             <dependency>
                 <groupId>org.esa.beam</groupId>
                 <artifactId>beam-core</artifactId>
-                <version>4.1</version>
+                <version>[4.1,4.2-SNAPSHOT)</version>
             </dependency>
 
             <dependency>
                 <groupId>org.esa.beam</groupId>
                 <artifactId>beam-bootstrap</artifactId>
-                <version>4.1</version>
+                <version>[4.1,4.2-SNAPSHOT)</version>
             </dependency>
 
             <dependency>
