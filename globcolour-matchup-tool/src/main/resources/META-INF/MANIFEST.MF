@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Main-Class: org.esa.beam.globcolour.tools.MatchupTool
+Class-Path: beam.jar nc-core.jar jdom.jar bc-jnn.jar jai-core.jar jai-codec.jar clibwrapper-jiio.jar jai_imageio.jar mlibwrapper-jai.jar jhall.jar jhdf.jar jhdf5.jar

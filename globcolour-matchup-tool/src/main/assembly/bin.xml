@@ -1,0 +1,72 @@
+<assembly>
+    <id>bin</id>
+
+    <formats>
+        <format>dir</format>
+        <format>zip</format>
+    </formats>
+
+    <files>
+        <file>
+            <source>README.txt</source>
+            <fileMode>292</fileMode>
+            <!-- octal 0444 -->
+            <filtered>true</filtered>
+        </file>
+        <file>
+            <source>LICENSE.txt</source>
+            <fileMode>292</fileMode>
+            <filtered>false</filtered>
+        </file>
+        <file>
+            <source>NOTICE.txt</source>
+            <fileMode>292</fileMode>
+            <filtered>false</filtered>
+        </file>
+        <file>
+            <source>gcmt.properties</source>
+            <fileMode>436</fileMode>
+            <!-- octal 0664 -->
+            <filtered>false</filtered>
+        </file>
+    </files>
+
+    <fileSets>
+        <fileSet>
+            <outputDirectory>bin</outputDirectory>
+            <directory>src/main/assembly/bin</directory>
+            <lineEnding>dos</lineEnding>
+            <fileMode>0775</fileMode>
+            <includes>
+                <include>gcmt.bat</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <outputDirectory>sources</outputDirectory>
+            <directory>src/main/java</directory>
+            <fileMode>0444</fileMode>
+        </fileSet>
+
+        <fileSet>
+            <outputDirectory>bin</outputDirectory>
+            <directory>src/main/assembly/bin</directory>
+            <lineEnding>unix</lineEnding>
+            <fileMode>0775</fileMode>
+            <includes>
+                <include>gcmt</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>lib</outputDirectory>
+            <outputFileNameMapping>${artifactId}.${extension}</outputFileNameMapping>
+            <fileMode>0444</fileMode>
+            <unpack>false</unpack>
+            <scope>runtime</scope>
+        </dependencySet>
+    </dependencySets>
+
+</assembly>

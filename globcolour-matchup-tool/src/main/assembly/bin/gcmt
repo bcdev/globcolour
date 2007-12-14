@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# If you have problems running this script try to set
+# the absolute path of GCTOOLS_HOME here:
+# export GCTOOLS_HOME="$HOME/usr/globcolour-tools-${project.version}"
+
+# Only set GCTOOLS_HOME if not already set
+
+PRGDIR=`dirname $0`
+
+if [ -z "$GCTOOLS_HOME" ]
+then
+    export GCTOOLS_HOME=`cd "$PRGDIR/.." ; pwd`
+fi
+
+if [ ! -x "$GCTOOLS_HOME/bin/gcmt" ]
+then
+    echo The GCTOOLS_HOME environment variable is not defined correctly.
+    echo This environment variable is needed to run this program.
+    exit
+fi
+
+java -Xms64m -Xmx256m -jar "$GCTOOLS_HOME/lib/globcolour-tools.jar" "$@"

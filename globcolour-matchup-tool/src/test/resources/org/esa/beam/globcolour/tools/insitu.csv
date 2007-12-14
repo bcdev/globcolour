@@ -1,0 +1,12 @@
+;Database,NOMAD,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+;Comments,wavelengths in the original database 411_443_489_510_530_555_619_670_683 Depth from ETOPO2. f/Q correction applied at UoP. Acdm=ad+ag+ap. Flags and Comments column contain original NOMAD Flags and IDs respectively,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+;Source,http://seabass.gsfc.nasa.gov/data/nomad_seabass_v1.3_2005262.txt,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+;Acknowledgements,NASA NOMAD and SeaBASS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+;Reference,Werdell P.J. and S.W. Bailey (2005) RSE,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+;Elevation,NA,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+;Missing,NaN,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+ID,DDS_ID,DDS_NAME,Year,Month,Date,Hour,Minute,Longitude,Latitude,Depth,Chla_hplc,Chla_fluor,Kd490,TSM,acdm443,bbp443,T865,exLwn412,exLwn443,exLwn490,exLwn510,exLwn531,exLwn555,exLwn620,exLwn670,exLwn681,exLwn709,Flag,Campaign,Comments
+ID,ii,dds_name,YYYY,MM,DD,hh,mm,decimal_degrees,decimal_degrees,metre,mg/m3,mg/m3,1/m,g/m3,1/m,1/m,None,mW/cm2/um/sr,mW/cm2/um/sr,mW/cm2/um/sr,mW/cm2/um/sr,mW/cm2/um/sr,mW/cm2/um/sr,mW/cm2/um/sr,mW/cm2/um/sr,mW/cm2/um/sr,mW/cm2/um/sr,BinaryCode,Cruisename,None
+String,Integer,String,Long,Integer,Integer,Integer,Integer,Float,Float,Float,Double,Double,Double,Double,Double,Double,Double,Double,Double,Double,Double,Double,Double,Double,Double,Double,Double,Long,String,String
+NO00-00001,00,XDDS,1991,12,03,17,43,-64.05,-64.77,0.00,NaN,1.21,0.07,NaN,NaN,NaN,NaN,0.83,0.73,0.76,NaN,NaN,NaN,NaN,NaN,NaN,NaN,16579,palmer_lter,5728
+NO00-00002,00,XDDS,1991,12,03,18,00,-64.05,-64.77,0.00,NaN,1.21,0.06,NaN,NaN,NaN,NaN,1.01,0.88,0.92,NaN,NaN,NaN,NaN,NaN,NaN,NaN,16579,palmer_lter,5729

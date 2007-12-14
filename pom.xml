@@ -13,9 +13,7 @@
 
     <modules>
         <module>globcolour-product-readers</module>
-        <!--
-                <module>globcolour-matchup-tool</module>
-        -->
+        <module>globcolour-matchup-tool</module>
     </modules>
 
     <dependencyManagement>
@@ -60,7 +58,7 @@
                 <artifactId>lib-netcdf</artifactId>
                 <version>2.2.16</version>
             </dependency>
-            
+
             <!-- Java Help Library ############################################# -->
 
             <dependency>
