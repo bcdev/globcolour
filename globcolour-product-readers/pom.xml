@@ -14,8 +14,8 @@
     <groupId>org.esa.beam.globcolour</groupId>
     <artifactId>globcolour-product-readers</artifactId>
     <name>GlobColour Product Readers</name>
-    <version>1.5-SNAPSHOT</version>
-    <description>GlobColour Binned and Mapped Product Readers</description>
+    <version>1.5</version>
+    <description>Product Readers for Binned and Mapped GlobColour data products</description>
 
     <dependencies>
         <dependency>
@@ -29,6 +29,10 @@
         <dependency>
             <groupId>org.esa.beam</groupId>
             <artifactId>beam-netcdf-reader</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ucar.netcdf</groupId>
+            <artifactId>lib-netcdf</artifactId>
         </dependency>
     </dependencies>
 

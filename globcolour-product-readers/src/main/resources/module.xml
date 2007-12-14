@@ -1,11 +1,9 @@
 <module>
     <manifestVersion>1.0.0</manifestVersion>
     <symbolicName>globcolour-product-readers</symbolicName>
-    <version>1.5-SNAPSHOT</version>
+    <version>1.5</version>
     <name>GlobColour Product Readers</name>
-
-
-    <description>Enables BEAM to read GlobColour binned and mapped data products.</description>
+    <description>Product Readers for Binned and Mapped GlobColour data products</description>
 
     <vendor>Brockmann Consult GmbH</vendor>
     <contactAddress>Max Planck Str.2, 21502 Geesthacht (Germany)</contactAddress>
@@ -34,7 +32,6 @@
         <optional>true</optional>
     </dependency>
 
-
     <categories>Reader,GlobColour</categories>
 
     <extension point="beam-visat:actions">
@@ -44,8 +41,8 @@
             <helpId>importGlobColourBinnedProduct</helpId>
             <formatName>GlobColour-Binned</formatName>
             <useAllFileFilter>true</useAllFileFilter>
-            <shortDescr>Import a GlobColour binned data product or product subset.</shortDescr>
-            <description>Import a GlobColour binned data product or product subset.</description>
+            <shortDescr>Import a Binned GlobColour data product or product subset.</shortDescr>
+            <description>Import a Mapped GlobColour data product or product subset.</description>
         </action>
         <action>
             <class>org.esa.beam.visat.actions.ProductImportAction</class>
@@ -53,8 +50,8 @@
             <helpId>importGlobColourMappedProduct</helpId>
             <formatName>GlobColour-Mapped</formatName>
             <useAllFileFilter>true</useAllFileFilter>
-            <shortDescr>Import a GlobColour mapped data product or product subset.</shortDescr>
-            <description>Import a GlobColour mapped data product or product subset.</description>
+            <shortDescr>Import a Mapped GlobColour data product or product subset.</shortDescr>
+            <description>Import a Mapped GlobColour data product or product subset.</description>
         </action>
     </extension>
 
