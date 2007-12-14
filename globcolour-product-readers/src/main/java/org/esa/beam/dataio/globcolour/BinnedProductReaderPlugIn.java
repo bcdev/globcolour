@@ -52,7 +52,7 @@ public class BinnedProductReaderPlugIn implements ProductReaderPlugIn {
     /**
      * The textual description of this {@link ProductReaderPlugIn}.
      */
-    public static final String FORMAT_DESCRIPTION = "GlobColour binned data product";
+    public static final String FORMAT_DESCRIPTION = "GlobColour-Binned Data Products";
     /**
      * The extension of the file format associated with this
      * {@link ProductReaderPlugIn}.

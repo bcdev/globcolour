@@ -49,7 +49,7 @@ public class MappedProductReaderPlugIn implements ProductReaderPlugIn {
     /**
      * The textual description of this {@link ProductReaderPlugIn}.
      */
-    public static final String DESCRIPTION = "Reader for GlobColour Mapped Products";
+    public static final String DESCRIPTION = "GlobColour-Mapped Data Products";
     /**
      * The extension of the file format associated with this
      * {@link ProductReaderPlugIn}.
