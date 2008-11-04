@@ -6,7 +6,7 @@
     <parent>
         <artifactId>globcolour-dds-tools</artifactId>
         <groupId>org.esa.beam.globcolour</groupId>
-        <version>1.5-SNAPSHOT</version>
+        <version>1.5</version>
     </parent>
 
     <packaging>jar</packaging>

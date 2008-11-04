@@ -3,6 +3,7 @@
     <symbolicName>globcolour-product-readers</symbolicName>
     <version>1.5</version>
     <name>GlobColour Product Readers</name>
+    
     <description>Product Readers for Binned and Mapped GlobColour data products</description>
 
     <vendor>Brockmann Consult GmbH</vendor>
