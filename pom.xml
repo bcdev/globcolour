@@ -13,7 +13,7 @@
 
     <modules>
         <module>globcolour-product-readers</module>
-        <module>globcolour-matchup-tool</module>
+<!--        <module>globcolour-matchup-tool</module>-->
     </modules>
 
     <dependencyManagement>
