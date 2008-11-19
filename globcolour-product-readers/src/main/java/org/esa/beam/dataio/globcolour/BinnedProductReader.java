@@ -40,7 +40,6 @@ import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * The class <code>BinnedProductReader</code> provides a reader for the Binned products
@@ -59,10 +58,9 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 public class BinnedProductReader extends AbstractProductReader {
 
-    private final AtomicReference<IsinGridStorageInfo> storageInfo = new AtomicReference<IsinGridStorageInfo>();
-
-    private EquirectGrid equirectGrid;
-    private NetcdfFile ncFile;
+    private volatile NetcdfFile ncFile;
+    private volatile EquirectGrid equirectGrid;
+    private volatile IsinGridStorageInfo storageInfo;
 
     /**
      * Constructs an instance of this class.
@@ -157,19 +155,19 @@ public class BinnedProductReader extends AbstractProductReader {
      * @see #getSubsetDef
      */
     @Override
-    protected void readBandRasterDataImpl(int sourceOffsetX,
-                                          int sourceOffsetY,
-                                          int sourceWidth,
-                                          int sourceHeight,
-                                          int sourceStepX,
-                                          int sourceStepY,
-                                          Band targetBand,
-                                          int targetOffsetX,
-                                          int targetOffsetY,
-                                          int targetWidth,
-                                          int targetHeight,
-                                          ProductData targetBuffer,
-                                          ProgressMonitor pm)
+    protected synchronized void readBandRasterDataImpl(int sourceOffsetX,
+                                                       int sourceOffsetY,
+                                                       int sourceWidth,
+                                                       int sourceHeight,
+                                                       int sourceStepX,
+                                                       int sourceStepY,
+                                                       Band targetBand,
+                                                       int targetOffsetX,
+                                                       int targetOffsetY,
+                                                       int targetWidth,
+                                                       int targetHeight,
+                                                       ProductData targetBuffer,
+                                                       ProgressMonitor pm)
             throws IOException {
         Guardian.assertTrue("sourceStepX != 1", sourceStepX == 1);
         Guardian.assertTrue("sourceStepY != 1", sourceStepY == 1);
@@ -181,9 +179,9 @@ public class BinnedProductReader extends AbstractProductReader {
 
         pm.beginTask(MessageFormat.format("Resampling data from band ''{0}''", targetBand.getName()), targetHeight);
         try {
-            if (storageInfo.get() == null) {
-                storageInfo.compareAndSet(null, createStorageInfo(ReaderConstants.IG.getRow(equirectGrid.getMinLat()),
-                                                                  equirectGrid.getRowCount()));
+            if (storageInfo == null) {
+                storageInfo = createStorageInfo(ReaderConstants.IG.getRow(equirectGrid.getMinLat()),
+                                                equirectGrid.getRowCount());
             }
 
             final int[] start = new int[1];
@@ -192,8 +190,8 @@ public class BinnedProductReader extends AbstractProductReader {
             for (int i = 0; i < targetHeight; ++i) {
                 final int y = sourceOffsetY + i;
 
-                start[0] = storageInfo.get().getOffset(y);
-                shape[0] = storageInfo.get().getBinCount(y);
+                start[0] = storageInfo.getOffset(y);
+                shape[0] = storageInfo.getBinCount(y);
 
                 Array cols = null;
                 Array data = null;
@@ -209,7 +207,7 @@ public class BinnedProductReader extends AbstractProductReader {
                 for (int j = 0, k = 0; j < targetWidth; ++j) {
                     final int x = sourceOffsetX + j;
                     // calculate the ISIN grid column corresponding to (x, y)
-                    final int z = ReaderConstants.IG.getCol(storageInfo.get().getRow(y), equirectGrid.getLon(x));
+                    final int z = ReaderConstants.IG.getCol(storageInfo.getRow(y), equirectGrid.getLon(x));
 
                     for (; k < shape[0]; ++k) {
                         index.set(k);
@@ -253,7 +251,7 @@ public class BinnedProductReader extends AbstractProductReader {
     @Override
     public void close() throws IOException {
         if (ncFile != null) {
-            storageInfo.set(null);
+            storageInfo = null;
             equirectGrid = null;
             ncFile.close();
             ncFile = null;
