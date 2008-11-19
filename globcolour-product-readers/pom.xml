@@ -14,8 +14,10 @@
     <groupId>org.esa.beam.globcolour</groupId>
     <artifactId>globcolour-product-readers</artifactId>
     <name>GlobColour Product Readers</name>
-    <version>1.5</version>
-    <description>Product Readers for Binned and Mapped GlobColour data products</description>
+    <version>1.5.1</version>
+    <description>
+        This module provides product readers for importing Binned and Mapped GlobColour data products into BEAM/VISAT.
+    </description>
 
     <dependencies>
         <dependency>

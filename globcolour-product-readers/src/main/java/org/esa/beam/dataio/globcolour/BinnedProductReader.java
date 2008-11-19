@@ -40,6 +40,7 @@ import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * The class <code>BinnedProductReader</code> provides a reader for the Binned products
@@ -58,9 +59,10 @@ import java.util.List;
  */
 public class BinnedProductReader extends AbstractProductReader {
 
-    private IsinGridStorageInfo storageInfo;
+    private final AtomicReference<IsinGridStorageInfo> storageInfo = new AtomicReference<IsinGridStorageInfo>();
+
     private EquirectGrid equirectGrid;
-    private NetcdfFile ncfile;
+    private NetcdfFile ncFile;
 
     /**
      * Constructs an instance of this class.
@@ -84,15 +86,16 @@ public class BinnedProductReader extends AbstractProductReader {
     @Override
     protected Product readProductNodesImpl() throws IOException {
         final File file = new File(getInput().toString());
-        ncfile = NetcdfFile.open(file.getPath());
+        ncFile = NetcdfFile.open(file.getPath());
 
-        final Group ncroot = ncfile.getRootGroup();
+        final Group ncroot = ncFile.getRootGroup();
 
         final double minLat = getDoubleValue(ncroot.findAttributeIgnoreCase(ProductAttributes.MIN_LAT), -90.0);
         final double maxLat = getDoubleValue(ncroot.findAttributeIgnoreCase(ProductAttributes.MAX_LAT), 90.0);
         final double minLon = getDoubleValue(ncroot.findAttributeIgnoreCase(ProductAttributes.MIN_LON), -180.0);
         final double maxLon = getDoubleValue(ncroot.findAttributeIgnoreCase(ProductAttributes.MAX_LON), 180.0);
-        final double latitudeOfTrueScale = getDoubleValue(ncroot.findAttributeIgnoreCase(ProductAttributes.SITE_LAT), 0.0);
+        final double latitudeOfTrueScale = getDoubleValue(ncroot.findAttributeIgnoreCase(ProductAttributes.SITE_LAT),
+                                                          0.0);
 
         equirectGrid = createEquirectGrid(minLat, maxLat, minLon, maxLon, latitudeOfTrueScale);
 
@@ -108,7 +111,7 @@ public class BinnedProductReader extends AbstractProductReader {
         }
 
         product.setFileLocation(file);
-        NetcdfReaderUtils.transferMetadata(ncfile, product.getMetadataRoot());
+        NetcdfReaderUtils.transferMetadata(ncFile, product.getMetadataRoot());
 
         final Dimension bin = ncroot.findDimension(ReaderConstants.BIN);
         final List<Variable> variableList = findVariables(ncroot, bin);
@@ -148,6 +151,7 @@ public class BinnedProductReader extends AbstractProductReader {
      * @param targetHeight  the height of region to be read given in the band's raster co-ordinates
      * @param targetBuffer  the destination buffer which receives the sample values to be read
      * @param pm            a monitor to inform the user about progress
+     *
      * @throws IOException if an I/O error occurs
      * @see #readBandRasterData
      * @see #getSubsetDef
@@ -172,14 +176,14 @@ public class BinnedProductReader extends AbstractProductReader {
         Guardian.assertTrue("sourceWidth != targetWidth", sourceWidth == targetWidth);
         Guardian.assertTrue("sourceHeight != targetHeight", sourceHeight == targetHeight);
 
-        final Variable col = ncfile.findVariable(ReaderConstants.COL);
-        final Variable var = ncfile.findVariable(targetBand.getName());
+        final Variable col = ncFile.findVariable(ReaderConstants.COL);
+        final Variable var = ncFile.findVariable(targetBand.getName());
 
         pm.beginTask(MessageFormat.format("Resampling data from band ''{0}''", targetBand.getName()), targetHeight);
         try {
-            if (storageInfo == null) {
-                storageInfo = createStorageInfo(ReaderConstants.IG.getRow(equirectGrid.getMinLat()),
-                                                equirectGrid.getRowCount());
+            if (storageInfo.get() == null) {
+                storageInfo.compareAndSet(null, createStorageInfo(ReaderConstants.IG.getRow(equirectGrid.getMinLat()),
+                                                                  equirectGrid.getRowCount()));
             }
 
             final int[] start = new int[1];
@@ -188,8 +192,8 @@ public class BinnedProductReader extends AbstractProductReader {
             for (int i = 0; i < targetHeight; ++i) {
                 final int y = sourceOffsetY + i;
 
-                start[0] = storageInfo.getOffset(y);
-                shape[0] = storageInfo.getBinCount(y);
+                start[0] = storageInfo.get().getOffset(y);
+                shape[0] = storageInfo.get().getBinCount(y);
 
                 Array cols = null;
                 Array data = null;
@@ -205,7 +209,7 @@ public class BinnedProductReader extends AbstractProductReader {
                 for (int j = 0, k = 0; j < targetWidth; ++j) {
                     final int x = sourceOffsetX + j;
                     // calculate the ISIN grid column corresponding to (x, y)
-                    final int z = ReaderConstants.IG.getCol(storageInfo.getRow(y), equirectGrid.getLon(x));
+                    final int z = ReaderConstants.IG.getCol(storageInfo.get().getRow(y), equirectGrid.getLon(x));
 
                     for (; k < shape[0]; ++k) {
                         index.set(k);
@@ -248,18 +252,18 @@ public class BinnedProductReader extends AbstractProductReader {
      */
     @Override
     public void close() throws IOException {
-        if (ncfile != null) {
-            storageInfo = null;
+        if (ncFile != null) {
+            storageInfo.set(null);
             equirectGrid = null;
-            ncfile.close();
-            ncfile = null;
+            ncFile.close();
+            ncFile = null;
         }
         super.close();
     }
 
     private IsinGridStorageInfo createStorageInfo(final int minRow, int rowCount)
             throws IOException, InvalidRangeException {
-        final Variable row = ncfile.findVariable(ReaderConstants.ROW);
+        final Variable row = ncFile.findVariable(ReaderConstants.ROW);
 
         final int[] offsets = new int[rowCount];
         int binCount = 0;

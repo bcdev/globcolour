@@ -46,7 +46,7 @@ import java.io.IOException;
  */
 public class MappedProductReader extends AbstractProductReader {
 
-    private ProductReader productReader;
+    private final ProductReader productReader;
 
     /**
      * Constructs an instance of this class.

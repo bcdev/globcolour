@@ -1,21 +1,25 @@
 <module>
     <manifestVersion>1.0.0</manifestVersion>
     <symbolicName>globcolour-product-readers</symbolicName>
-    <version>1.5</version>
+    <version>1.5.1</version>
     <name>GlobColour Product Readers</name>
     
-    <description>Product Readers for Binned and Mapped GlobColour data products</description>
+    <description>
+        This module provides product readers for importing Binned and Mapped GlobColour data products into BEAM/VISAT.
+    </description>
 
     <vendor>Brockmann Consult GmbH</vendor>
     <contactAddress>Max Planck Str.2, 21502 Geesthacht (Germany)</contactAddress>
-    <copyright>(C) 2007 by Brockmann Consult GmbH</copyright>
+    <copyright>(C) 2008 by Brockmann Consult GmbH</copyright>
     <url>http://envisat.esa.int/beam</url>
     <licenseUrl>http://www.gnu.org/licenses/gpl.html</licenseUrl>
 
     <changelog>
         <![CDATA[
-        <p>Version 1.5 - Initial port to BEAM 4.1
-        </p>
+        Changes in Version 1.5.1<br/>
+        [GLOBCOL-51] Binned Product Reader throws exception<br/><br/>
+
+        Version 1.5 - Initial port to BEAM 4.1
         ]]>
     </changelog>
 
