@@ -1,3 +1,3 @@
 NOTE:
-This project is not any more maintained. It's only here for legacy reasons.
+This is a legacy project. It is not maintained any more.
 The GlobColour product reader is now maintained in the GlobToolbox project. 
